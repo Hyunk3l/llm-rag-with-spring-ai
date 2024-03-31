@@ -118,16 +118,4 @@ class Chatbot {
         var aiResponse = aiClient.call(prompt);
         return aiResponse.getResult().getOutput().getContent();
     }
-} // ...
-
-
-
-
-
-
-
-
-
-
-
-
+}

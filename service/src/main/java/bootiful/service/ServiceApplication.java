@@ -59,7 +59,6 @@ public class ServiceApplication {
         var pdfReader = new PagePdfDocumentReader(pdfResource, config);
         var textSplitter = new TokenTextSplitter();
         vectorStore.accept(textSplitter.apply(pdfReader.get()));
-
     }
 
     @Bean
@@ -67,20 +66,18 @@ public class ServiceApplication {
             Chatbot chatbot,
             VectorStore vectorStore,
             JdbcTemplate jdbcTemplate,
-            @Value("file://medicaid-wa-faqs.pdf") Resource resource) {
+            @Value("file://${HOME}/code/llm-rag-with-spring-ai/service/medicaid-wa-faqs.pdf") Resource resource) {
         return args -> {
             init(vectorStore, jdbcTemplate, resource);
             var response = chatbot.chat("what should I know about the transition to consumer direct care network washington?");
             System.out.println(Map.of("response", response));
         };
     }
-
 }
 
 
 @Component
 class Chatbot {
-
 
     private final String template = """
                         

@@ -68,8 +68,9 @@ public class ServiceApplication {
             JdbcTemplate jdbcTemplate,
             @Value("file://${HOME}/code/llm-rag-with-spring-ai/service/medicaid-wa-faqs.pdf") Resource resource) {
         return args -> {
-            init(vectorStore, jdbcTemplate, resource);
-            var response = chatbot.chat("what should I know about the transition to consumer direct care network washington?");
+            //init(vectorStore, jdbcTemplate, resource);
+            //var response = chatbot.chat("what should I know about the transition to consumer direct care network washington?");
+            var response = "FAKE";
             System.out.println(Map.of("response", response));
         };
     }

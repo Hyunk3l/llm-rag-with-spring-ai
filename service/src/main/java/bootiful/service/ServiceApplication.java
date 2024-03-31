@@ -67,7 +67,7 @@ public class ServiceApplication {
             Chatbot chatbot,
             VectorStore vectorStore,
             JdbcTemplate jdbcTemplate,
-            @Value("file://${HOME}/Desktop/pdfs/medicaid-wa-faqs.pdf") Resource resource) {
+            @Value("file://medicaid-wa-faqs.pdf") Resource resource) {
         return args -> {
             init(vectorStore, jdbcTemplate, resource);
             var response = chatbot.chat("what should I know about the transition to consumer direct care network washington?");

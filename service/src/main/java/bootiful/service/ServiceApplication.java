@@ -68,9 +68,8 @@ public class ServiceApplication {
             JdbcTemplate jdbcTemplate,
             @Value("file://${HOME}/code/llm-rag-with-spring-ai/service/medicaid-wa-faqs.pdf") Resource resource) {
         return args -> {
-            //init(vectorStore, jdbcTemplate, resource);
-            //var response = chatbot.chat("what should I know about the transition to consumer direct care network washington?");
-            var response = "FAKE";
+            init(vectorStore, jdbcTemplate, resource);
+            var response = chatbot.chat("what should I know about the transition to consumer direct care network washington?");
             System.out.println(Map.of("response", response));
         };
     }
@@ -81,7 +80,6 @@ public class ServiceApplication {
 class Chatbot {
 
     private final String template = """
-                        
             You're assisting with questions about services offered by Carina.
             Carina is a two-sided healthcare marketplace focusing on home care aides (caregivers)
             and their Medicaid in-home care clients (adults and children with developmental disabilities and low income elderly population).

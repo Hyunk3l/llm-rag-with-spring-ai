@@ -12,7 +12,6 @@ import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.containers.wait.strategy.Wait.forListeningPort
-import org.testcontainers.containers.wait.strategy.WaitStrategy
 import org.testcontainers.utility.DockerImageName
 
 @SpringBootTest(

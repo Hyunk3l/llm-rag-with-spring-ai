@@ -8,6 +8,12 @@ import org.mockito.Mockito.doNothing
 import org.mockito.Mockito.verify
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.test.context.DynamicPropertyRegistry
+import org.springframework.test.context.DynamicPropertySource
+import org.testcontainers.containers.PostgreSQLContainer
+import org.testcontainers.containers.wait.strategy.Wait.forListeningPort
+import org.testcontainers.containers.wait.strategy.WaitStrategy
+import org.testcontainers.utility.DockerImageName
 
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
@@ -28,6 +34,21 @@ class ChatBotAppShould {
     companion object {
         @JvmStatic
         val mockHttpServer: WireMockServer = startWiremock()
+
+        @JvmStatic
+        @DynamicPropertySource
+        fun postgresProperties(registry: DynamicPropertyRegistry) {
+            registry.add("spring.datasource.url", postgresContainer::getJdbcUrl)
+            registry.add("spring.datasource.username", postgresContainer::getUsername)
+            registry.add("spring.datasource.password", postgresContainer::getPassword)
+        }
+
+        val postgresContainer: PostgreSQLContainer<*> = PostgreSQLContainer(DockerImageName.parse("pgvector/pgvector:pg16"))
+            .withDatabaseName("vector_store")
+            .withUsername("postgres")
+            .withPassword("postgres")
+            .waitingFor(forListeningPort())
+            .also{ it.start() }
 
         private fun startWiremock(): WireMockServer {
             val wireMockServer = WireMockServer(7777)

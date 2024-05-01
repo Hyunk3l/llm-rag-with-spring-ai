@@ -1,6 +1,8 @@
 package bootiful.service;
 
 
+import bootiful.model.ConsolePrinter;
+import bootiful.model.Printer;
 import org.springframework.ai.chat.ChatClient;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.Prompt;
@@ -62,15 +64,22 @@ public class ServiceApplication {
     }
 
     @Bean
+    ConsolePrinter consolePrinter() {
+        return new ConsolePrinter();
+    }
+
+    @Bean
     ApplicationRunner applicationRunner(
             Chatbot chatbot,
             VectorStore vectorStore,
             JdbcTemplate jdbcTemplate,
-            @Value("file://${HOME}/code/llm-rag-with-spring-ai/service/medicaid-wa-faqs.pdf") Resource resource) {
+            @Value("file://${HOME}/code/llm-rag-with-spring-ai/service/medicaid-wa-faqs.pdf") Resource resource,
+            Printer printer
+    ) {
         return args -> {
             init(vectorStore, jdbcTemplate, resource);
             var response = chatbot.chat("what should I know about the transition to consumer direct care network washington?");
-            System.out.println(Map.of("response", response));
+            printer.print(response);
         };
     }
 }

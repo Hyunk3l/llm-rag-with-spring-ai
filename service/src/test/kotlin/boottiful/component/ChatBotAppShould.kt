@@ -1,6 +1,7 @@
-package bootiful.service.component
+package boottiful.component
 
 import bootiful.model.ConsolePrinter
+import bootiful.service.ServiceApplication
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock
 import org.junit.jupiter.api.Test
@@ -16,6 +17,7 @@ import org.testcontainers.utility.DockerImageName
 
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+    classes = [ServiceApplication::class],
     properties = ["wiremock.port=7777", "spring.ai.openai.base-url=http://localhost:7777"],
 )
 class ChatBotAppShould {

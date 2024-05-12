@@ -1,6 +1,5 @@
-package bootiful.service.component
+package bootiful.service
 
-import bootiful.service.DocumentSplitter
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.types.shouldBeInstanceOf
 import org.junit.jupiter.api.Test

@@ -11,6 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 import org.testcontainers.containers.PostgreSQLContainer
+import org.testcontainers.containers.wait.strategy.Wait.forListeningPort
 import org.testcontainers.utility.DockerImageName
 
 @SpringBootTest(
@@ -45,6 +46,7 @@ class ChatBotAppShould {
             .withDatabaseName("vector_store")
             .withUsername("postgres")
             .withPassword("postgres")
+            .waitingFor(forListeningPort())
             .also{ it.start() }
 
         private fun startWiremock(): WireMockServer {

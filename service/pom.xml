@@ -89,6 +89,12 @@
             <version>1.19.7</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.kotest</groupId>
+            <artifactId>kotest-assertions-core-jvm</artifactId>
+            <version>5.9.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

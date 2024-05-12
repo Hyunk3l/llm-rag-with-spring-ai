@@ -46,7 +46,7 @@ public class ServiceApplication {
             Chatbot chatbot,
             VectorStore vectorStore,
             JdbcTemplate jdbcTemplate,
-            @Value("file://${HOME}/code/llm-rag-with-spring-ai/service/medicaid-wa-faqs.pdf") Resource resource,
+            @Value("${application.medicaid.file}") Resource resource,
             ConsolePrinter printer
     ) {
         return args -> {

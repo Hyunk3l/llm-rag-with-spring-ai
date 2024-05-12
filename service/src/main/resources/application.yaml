@@ -1,0 +1,16 @@
+
+spring:
+  ai:
+    openai:
+      api-key: ${OPENAI_LLM_RAG_KEY}
+  threads:
+    virtual:
+      enabled: true
+  datasource:
+    password: postgres
+    username: postgres
+    url: jdbc:postgresql://localhost/vector_store
+
+application:
+  medicaid:
+    file: classpath:medicaid/pdf/medicaid-wa-faqs.pdf

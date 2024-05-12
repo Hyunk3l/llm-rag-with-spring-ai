@@ -42,7 +42,7 @@ class ChatBotAppShould {
             registry.add("spring.datasource.password", postgresContainer::getPassword)
         }
 
-        val postgresContainer: PostgreSQLContainer<*> = PostgreSQLContainer(DockerImageName.parse("pgvector/pgvector:pg16"))
+        private val postgresContainer: PostgreSQLContainer<*> = PostgreSQLContainer(DockerImageName.parse("pgvector/pgvector:pg16"))
             .withDatabaseName("vector_store")
             .withUsername("postgres")
             .withPassword("postgres")
